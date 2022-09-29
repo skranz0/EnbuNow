@@ -10,6 +10,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -17,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.enbunow.ui.theme.EnbuNowTheme
-import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +40,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Homescreen() {
-    var kataList = "Kata will be here ..." // TODO: update List
+    val kataList: MutableState<String> = remember { mutableStateOf("noch unbekannt.") }
 
     Column {
         Row {
@@ -69,22 +71,27 @@ fun Homescreen() {
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
             Button(
-                onClick = { kataList = chooseKata(3) },
+                onClick = { kataList.value = chooseKata(3) },
                 modifier = Modifier.padding(6.dp)
             ) {
                 Text(text = "3 kata")
             }
             Button(
-                onClick = { kataList = chooseKata(5) },
+                onClick = { kataList.value = chooseKata(5) },
                 modifier = Modifier.padding(6.dp)
             ) {
                 Text(text = "5 kata")
             }
         }
-        Text(text = kataList)
+        Text(
+            text = "Deine Kata sind:\n${kataList.value}",
+            fontSize = 24.sp,
+            modifier = Modifier.padding(30.dp)
+        )
         Button(
             onClick = { /*TODO*/ },
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
         ) {
             Text(text = "Hajime")
         }
@@ -92,8 +99,20 @@ fun Homescreen() {
 }
 
 fun chooseKata(number: Int): String {
-    val katas = IntArray(number) { Random.nextInt(1,13) }
-    return katas.toString()
+    val znkr: List<String> = listOf(
+        "Mae", "Ushiro", "Ukenagashi",
+        "Tsukaate", "Kesagiri", "Morotezuki",
+        "Sampogiri", "Ganmenate", "Seotezuki",
+        "Shihogiri", "Sogiri", "Nukiuchi"
+    )
+    val randomElements = znkr.asSequence().shuffled().take(number).toList()
+
+    var katas = ""
+    for (kata in randomElements) {
+        katas += "- $kata \n"
+    }
+
+    return katas
 }
 
 @Preview(showBackground = true)
