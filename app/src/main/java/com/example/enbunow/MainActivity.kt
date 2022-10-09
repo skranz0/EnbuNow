@@ -100,16 +100,17 @@ fun Homescreen() {
 
 fun chooseKata(number: Int): String {
     val znkr: List<String> = listOf(
-        "Mae", "Ushiro", "Ukenagashi",
-        "Tsukaate", "Kesagiri", "Morotezuki",
-        "Sampogiri", "Ganmenate", "Seotezuki",
-        "Shihogiri", "Sogiri", "Nukiuchi"
+        "01 - Mae", "02 - Ushiro", "03 - Ukenagashi",
+        "04 - Tsukaate", "05 - Kesagiri", "06 - Morotezuki",
+        "07 - Sampogiri", "08 - Ganmenate", "09 - Seotezuki",
+        "10 - Shihogiri", "11 - Sogiri", "12 - Nukiuchi"
     )
     val randomElements = znkr.asSequence().shuffled().take(number).toList()
+        .sorted()
 
     var katas = ""
     for (kata in randomElements) {
-        katas += "- $kata \n"
+        katas += "> $kata \n"
     }
 
     return katas
