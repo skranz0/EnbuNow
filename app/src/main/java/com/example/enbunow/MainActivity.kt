@@ -88,6 +88,7 @@ fun Homescreen() {
             fontSize = 24.sp,
             modifier = Modifier.padding(30.dp)
         )
+        /*
         Button(
             onClick = { /*TODO*/ },
             modifier = Modifier
@@ -95,6 +96,7 @@ fun Homescreen() {
         ) {
             Text(text = "Hajime")
         }
+        */
     }
 }
 
