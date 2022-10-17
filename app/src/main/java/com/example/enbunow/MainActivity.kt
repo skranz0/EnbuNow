@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,13 +41,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Homescreen() {
-    val kataList: MutableState<String> = remember { mutableStateOf("noch unbekannt.") }
+    val kataList: MutableState<String> = remember { mutableStateOf("...") }
 
     Column {
         Row {
             Image(
                 painter = painterResource(id = R.drawable.hakushinkai_logo),
-                contentDescription = "Logo of the Hakushinkai Halle e.V.",
+                contentDescription = stringResource(R.string.logo_alt),
                 modifier = Modifier
                     .padding(3.dp)
                     .height(48.dp)
@@ -59,7 +60,7 @@ fun Homescreen() {
                         .padding(start = 4.dp, top = 2.dp, end = 4.dp)
                 )
                 Text(
-                    text = "Chooses kata for you!",
+                    text = stringResource(R.string.app_description),
                     fontSize = 14.sp,
                     modifier = Modifier
                         .padding(start = 4.dp, bottom = 2.dp, end = 4.dp)
@@ -84,7 +85,7 @@ fun Homescreen() {
             }
         }
         Text(
-            text = "Deine Kata sind:\n${kataList.value}",
+            text = stringResource(R.string.kata_head) + "\n" + kataList.value,
             fontSize = 24.sp,
             modifier = Modifier.padding(30.dp)
         )

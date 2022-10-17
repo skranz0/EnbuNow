@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_description">Chooses kata for you!</string>
+    <string name="kata_head">Your kata are:</string>
+    <string name="logo_alt">Logo of the Hakushinkai Halle e.V.</string>
+</resources>
